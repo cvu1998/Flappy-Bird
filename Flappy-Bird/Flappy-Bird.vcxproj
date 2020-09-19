@@ -66,6 +66,11 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\$(Platform)\;$(SolutionDir)Elysium\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;Elysium.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>rmdir "$(SolutionDir)bin\$(Configuration)-$(Platform)\Flappy-Bird\res" /s /q
+mkdir "$(TargetDir)res"
+xcopy /E /Y "$(ProjectDir)res" "$(SolutionDir)bin\$(Configuration)-$(Platform)\Flappy-Bird\res"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -86,6 +91,11 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\$(Platform)\;$(SolutionDir)Elysium\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;Elysium.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>rmdir "$(SolutionDir)bin\$(Configuration)-$(Platform)\Flappy-Bird\res" /s /q
+mkdir "$(TargetDir)res"
+xcopy /E /Y "$(ProjectDir)res" "$(SolutionDir)bin\$(Configuration)-$(Platform)\Flappy-Bird\res"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
