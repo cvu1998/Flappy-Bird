@@ -10,35 +10,25 @@ namespace Elysium
     using Vector3 = glm::vec3;
     using Vector4 = glm::vec4;
 
-    template<class T>
+    template<typename T>
     static T abs(const T& vector)
     {
         return glm::abs(vector);
     }
+
 
     static float cross(const Vector2& a, const Vector2& b)
     {
         return a.x * b.y - a.y * b.x;
     }
 
-    template<class T>
+    template<typename T>
     static bool isAllNaN(const T& vector)
     {
         return glm::all(glm::isnan(vector));
     }
 
-    template <class T>
-    static T max(const T& vector)
-    {
-        return glm::max(vector);
-    }
-
-    static float radians(float angle)
-    {
-        return glm::radians(angle);
-    }
-
-    static bool isinf(const Vector2& vector)
+    static bool isInf(const Vector2& vector)
     {
         return (std::isinf(vector.x) || std::isinf(vector.y));
     }
@@ -46,6 +36,29 @@ namespace Elysium
     static bool isNaN(const Vector2& vector)
     {
         return (std::isnan(vector.x) || std::isnan(vector.y));
+    }
+
+    template <typename T>
+    static T max(const T& v1, const T& v2)
+    {
+        return glm::max(v1, v2);
+    }
+
+    template <typename T>
+    static T min(const T& v1, const T& v2)
+    {
+        return glm::min(v1, v2);
+    }
+
+    static float radians(float angle)
+    {
+        return glm::radians(angle);
+    }
+
+    template <typename T>
+    static int sgn(T val)
+    {
+        return (T(0) < val) - (val < T(0));
     }
 
     struct Complex
@@ -56,12 +69,12 @@ namespace Elysium
 
         Complex(float x, float y) : real(x), imaginary(y) { }
 
-        Complex operator + (const Complex& a)
+        Complex operator+(const Complex& a)
         {
             return { this->real + a.real, this->imaginary + a.imaginary };
         }
 
-        Complex operator * (float a)
+        Complex operator*(float a)
         {
             return { this->real * a, this->real * a };
         }
@@ -71,7 +84,7 @@ namespace Elysium
             return { complex.real * x, complex.imaginary * y };
         }
 
-        Complex operator * (const Complex& a)
+        Complex operator*(const Complex& a)
         {
             return { this->real * a.real - this->imaginary * a.imaginary,
                 this->real * a.imaginary + this->imaginary * a.real };

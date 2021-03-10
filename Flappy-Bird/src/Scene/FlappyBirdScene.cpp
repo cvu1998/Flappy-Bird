@@ -9,7 +9,7 @@ FlappyBirdScene::FlappyBirdScene(unsigned int width, unsigned int height, bool* 
     e_PhysicsSystem.setGravitaionnalAccel(20.0f);
 
     std::vector<Elysium::Quad> quads;
-    Elysium::Editor::getSceneFromFile("res/scenes/Flappy.ely", quads);
+    Elysium::Editor::Deserialize("res/scenes/Flappy.ely", quads);
 
     for (const Elysium::Quad& quad : quads)
     {
@@ -338,7 +338,7 @@ void FlappyBirdScene::onUpdate(Elysium::Timestep ts)
     Elysium::Renderer2D::endScene();
 
     ImGui::Begin("Flappy Bird");
-    ImGui::Checkbox("Turn Vertical Sync on", m_VSync);
+    ImGui::Checkbox("Turn Vertical Sync On", m_VSync);
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     if (m_Bird.UseRLAgent)
         if (ImGui::Button("PLAY"))

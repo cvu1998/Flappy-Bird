@@ -6,7 +6,7 @@ private:
     bool m_VSync = false;
 
 public:
-    Application(bool imgui=false) : Elysium::Application(imgui)
+    Application(bool imgui=false) : Elysium::Application("Flappy Bird", imgui)
     {
         m_Window->setVSync(m_VSync);
         m_SceneManager.loadScene(new FlappyBirdScene(m_Window->getWidth(), m_Window->getHeight(), &m_VSync));

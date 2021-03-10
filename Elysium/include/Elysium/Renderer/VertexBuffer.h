@@ -2,7 +2,8 @@
 
 #include "Elysium/Renderer/VertexBufferLayout.h"
 
-class VertexBuffer {
+class VertexBuffer 
+{
 private:
     unsigned int m_RendererID;
 
@@ -14,7 +15,7 @@ public:
     ~VertexBuffer();
 
     void bind() const;
-    void unBind() const;
+    void unbind() const;
 
     inline unsigned int getRendererID() const { return m_RendererID; };
 };

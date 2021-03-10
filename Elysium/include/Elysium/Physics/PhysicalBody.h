@@ -48,8 +48,9 @@ namespace Elysium
             const CollisionInfo& collisionInfo);
 
     private:
-        const char* Name = nullptr;
-        float Mass = 0.0f;
+        const char* Tag = nullptr;
+        float Mass = std::numeric_limits<float>::max();
+        float AngularVelocity = 0.0f;
         float Inertia = 0.0f;
         float Radius = 0.0f;
         Vector2 Size = { 1.0f, 1.0f };
@@ -67,8 +68,10 @@ namespace Elysium
             }
         };
 
-        std::unordered_map<Vector2, Vector2, Hash_Vector2> Normals;
         Vector2 ContactNormal = { 0.0f, 0.0f };
+        Vector2 ContactImpulse = { 0.0f, 0.0f };
+        Vector2 Normal = { 0.0f, 0.0f };
+        Vector2 ElastictyVector = { 0.0f, 0.0f };
 
         std::vector<Vector2> m_ModelVertices;
         
@@ -97,16 +100,16 @@ namespace Elysium
 
     private:
         PhysicalBody();
-        PhysicalBody(BodyType type, const char* name, float mass, const Vector2& initialPosition, const Vector2& size,
+        PhysicalBody(BodyType type, const char* tag, float mass, const Vector2& initialPosition, const Vector2& size,
             Collision_Callback callback);
 
         Vector2 tranformVertex(const Vector2& vertex) const;
 
     public:
-        static PhysicalBody createPhysicalBody(BodyType type, const char* name, float mass, const Vector2& initialPosition, const Vector2& size,
+        static PhysicalBody createPhysicalBody(BodyType type, const char* tag, float mass, const Vector2& initialPosition, const Vector2& size,
             Collision_Callback callback);
 
-        inline const char* getName() const { return Name; }
+        inline const char* getTag() const { return Tag; }
         inline float getMass() const { return Mass; }
         inline const Vector2& getSize() const { return Size; }
 
@@ -119,7 +122,12 @@ namespace Elysium
 
         inline void setNumberOfCallbackExecution(unsigned int number) { NumberOfExecution = number; }
 
-        void setModelVertices(const std::vector<Vector2>& vertices) { m_ModelVertices = vertices; }
+        void setModelVertices(const std::vector<Vector2>& vertices, float inertia) 
+        {
+            m_ModelVertices = vertices;
+            Inertia = inertia;
+        }
+
         const std::vector<Vector2>& getModelVertices() const { return m_ModelVertices; }
         std::vector<Vector2>getVertices() const;
 
