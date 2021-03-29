@@ -9,7 +9,8 @@ FlappyBirdScene::FlappyBirdScene(unsigned int width, unsigned int height, bool* 
     e_PhysicsSystem.setGravitaionnalAccel(20.0f);
 
     std::vector<Elysium::Quad> quads;
-    Elysium::Editor::Deserialize("res/scenes/Flappy.ely", quads);
+    if (!Elysium::Editor::Deserialize("res/scenes/Flappy.ely", quads))
+        ELY_ERROR("Scene deserialization error!");
 
     for (const Elysium::Quad& quad : quads)
     {
